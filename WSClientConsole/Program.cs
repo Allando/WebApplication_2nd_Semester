@@ -21,7 +21,7 @@ namespace WSClientConsole
             {
                 client.BaseAddress = new Uri(serverUrl);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/jason"));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 try
                 {
@@ -35,10 +35,9 @@ namespace WSClientConsole
                         }
                     }
                 }
-                catch (Exception)
+                catch
                 {
                     
-                    throw;
                 }
             }
         }
