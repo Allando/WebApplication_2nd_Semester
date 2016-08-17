@@ -12,32 +12,31 @@ namespace WSClientConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Select whacha want to do!");
-            Console.WriteLine("1. See all hotels\n2. See Specific hotel");
+            //Console.WriteLine("Select whacha want to do!");
+            //Console.WriteLine("1. See all hotels\n2. See Specific hotel");
 
-            var choice = Console.ReadLine();
-            while (choice != "0")
-            {
-                if (choice == "1" || choice == "2")
-                {
-                    switch (choice)
-                    {
-                        case "1":
-                            ListHotels(TODO, TODO2);
-                            break;
-                        case "2":
-                            ShowSpecificHotel(TODO, TODO2, TODO);
-                            break;
-                    }
-                }
-            }
+            //var choice = Console.ReadLine();
+            //while (choice != "0")
+            //{
+            //    if (choice == "1" || choice == "2")
+            //    {
+            //        switch (choice)
+            //        {
+            //            case "1":
+            //                ListHotels(TODO, TODO2);
+            //                break;
+            //            case "2":
+            //                ShowSpecificHotel(TODO, TODO2, TODO);
+            //                break;
+            //        }
+            //    }
+            //}
             const string serverUrl = "http://localhost:6015";
             HttpClientHandler handler = new HttpClientHandler();
             handler.UseDefaultCredentials = true;
 
-        }
-        private static void ListHotels(HttpMessageHandler handler, string serverUrl)
-        {
+
+
             //HTTP GET All
             using (var client = new HttpClient(handler))
             {
@@ -64,13 +63,12 @@ namespace WSClientConsole
                 }
                 catch (ArgumentException e)
                 {
-                    Console.WriteLine("pao0jdk" + e);
+                    Console.WriteLine("GET ALL ERROR!!" + e);
                 }
             }
-        }
 
-        private static void ShowSpecificHotel(HttpMessageHandler handler, string serverUrl, object Hotel_No)
-        {
+
+
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(serverUrl);
@@ -79,7 +77,7 @@ namespace WSClientConsole
 
                 try
                 {
-                    var response = client.GetAsync("api/hotel/" + Hotel_No).Result;
+                    var response = client.GetAsync("api/hotel/").Result;
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -88,7 +86,7 @@ namespace WSClientConsole
 
                         var hotelQuery =
                             from h in hotels
-                            
+
                             select h;
 
                         foreach (var h in hotelQuery)
@@ -97,12 +95,13 @@ namespace WSClientConsole
                         }
                     }
                 }
-                catch (Exception)
+                catch (ArgumentException e)
                 {
 
-                    throw;
+                    Console.WriteLine("GET 1 ERROR!!" + e);
                 }
             }
+
         }
     }
 }
