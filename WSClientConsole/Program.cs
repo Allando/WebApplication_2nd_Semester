@@ -12,25 +12,7 @@ namespace WSClientConsole
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Select whacha want to do!");
-            //Console.WriteLine("1. See all hotels\n2. See Specific hotel");
-
-            //var choice = Console.ReadLine();
-            //while (choice != "0")
-            //{
-            //    if (choice == "1" || choice == "2")
-            //    {
-            //        switch (choice)
-            //        {
-            //            case "1":
-            //                ListHotels(TODO, TODO2);
-            //                break;
-            //            case "2":
-            //                ShowSpecificHotel(TODO, TODO2, TODO);
-            //                break;
-            //        }
-            //    }
-            //}
+            
             const string serverUrl = "http://localhost:6015";
             HttpClientHandler handler = new HttpClientHandler();
             handler.UseDefaultCredentials = true;
