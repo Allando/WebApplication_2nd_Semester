@@ -1,3 +1,5 @@
+using System.Collections;
+
 namespace WebApplication_2nd_Semester
 {
     using System;
@@ -7,7 +9,7 @@ namespace WebApplication_2nd_Semester
     using System.Data.Entity.Spatial;
 
     [Table("Hotel")]
-    public partial class Hotel
+    public partial class Hotel 
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hotel()
@@ -34,5 +36,7 @@ namespace WebApplication_2nd_Semester
         {
             return $"Address: {Address}, Hotel_No: {Hotel_No}, Name: {Name}";
         }
+
+      
     }
 }
