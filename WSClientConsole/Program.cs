@@ -77,6 +77,8 @@ namespace WSClientConsole
                 Name = "Hotel Motel"
             };
 
+
+
             var testHotel = new Hotel()
             {
                 Hotel_No = 11,
@@ -84,46 +86,84 @@ namespace WSClientConsole
                 Name = "Test"
 
             };
-            //POST Hotel
+            ////POST Hotel
+            //using (var client = new HttpClient(handler))
+            //{
+            //    client.BaseAddress = new Uri(serverUrl);
+            //    client.DefaultRequestHeaders.Clear();
+            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //    var response = client.PostAsJsonAsync("api/hotels", testHotel).Result;
+            //    try
+            //    {
+            //        if (response.IsSuccessStatusCode)
+            //        {
+            //            Console.WriteLine("SUCCES!!! Hotellet er oprettet");
+            //            Console.WriteLine("Statuskode: " + response.StatusCode);
+            //            Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
+            //            Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
+            //            Console.WriteLine("Content: " + response.Content);
+            //            Console.WriteLine("Version: " + response.Version);
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("Fejl, hotellet blev ikke oprettet");
+            //            Console.WriteLine("Statuskode: " + response.StatusCode);
+            //            Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
+            //            Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
+            //            Console.WriteLine("Content: " + response.Content);
+            //            Console.WriteLine("Version: " + response.Version);
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine("It's fucked: " + e);
+            //    }
+            //}
+
+
+
+            //Put Hotel
+
+            //The change
+            shitHotel.Name = "Not Gansta hotel";
+
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(serverUrl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.PostAsJsonAsync("api/hotels", testHotel).Result;
-                try
+                var response = client.PutAsJsonAsync<Hotel>("api/hotels/10", shitHotel).Result;
                 {
-                    if (response.IsSuccessStatusCode)
+                    try
                     {
-                        Console.WriteLine("SUCCES!!! Hotellet er oprettet");
-                        Console.WriteLine("Statuskode: " + response.StatusCode);
-                        Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
-                        Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
-                        Console.WriteLine("Content: " + response.Content);
-                        Console.WriteLine("Version: " + response.Version);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            Console.WriteLine("SUCCES!!! Hotellet er opdateret");
+                            Console.WriteLine("Statuskode: " + response.StatusCode);
+                            Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
+                            Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
+                            Console.WriteLine("Content: " + response.Content);
+                            Console.WriteLine("Version: " + response.Version);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Fejl, hotellet blev ikke opdateret");
+                            Console.WriteLine("Statuskode: " + response.StatusCode);
+                            Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
+                            Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
+                            Console.WriteLine("Content: " + response.Content);
+                            Console.WriteLine("Version: " + response.Version);
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        Console.WriteLine("Fejl, hotellet blev ikke oprettet");
-                        Console.WriteLine("Statuskode: " + response.StatusCode);
-                        Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
-                        Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
-                        Console.WriteLine("Content: " + response.Content);
-                        Console.WriteLine("Version: " + response.Version);
+                        Console.WriteLine("It's fucked: " + e);
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine("It's fucked: " + e);
-                }
-
-
-
-
             }
-
-
         }
     }
 }
+
