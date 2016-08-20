@@ -32,9 +32,16 @@ namespace WebApplication_2nd_Semester
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Rooms { get; set; }
 
+        public Hotel(int hotelNo, string name, string address)
+        {
+            Hotel_No = hotelNo;
+            Name = name;
+            Address = address;
+        }
+
         public override string ToString()
         {
-            return $"Address: {Address}, Hotel_No: {Hotel_No}, Name: {Name}";
+            return $"Hotel_No: {Hotel_No}, Address: {Address}, Name: {Name}";
         }
 
       

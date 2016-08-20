@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using WebApplication_2nd_Semester;
 
@@ -68,14 +69,21 @@ namespace WSClientConsole
             //    }
             //}
 
-            
             //Hotel til db
-            var ShitHotel = new Hotel()
+            var shitHotel = new Hotel()
             {
-                Address = "GangstaStreet 420",
+                Hotel_No = 10,
+                Address = "4000 Roskilde",
                 Name = "Hotel Motel"
             };
-            
+
+            var testHotel = new Hotel()
+            {
+                Hotel_No = 11,
+                Address = "654654 TEst",
+                Name = "Test"
+
+            };
             //POST Hotel
             using (var client = new HttpClient(handler))
             {
@@ -83,18 +91,36 @@ namespace WSClientConsole
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                var response = client.PostAsJsonAsync("api/hotels", testHotel).Result;
                 try
                 {
-                    var response = client.PostAsJsonAsync<Hotel>("api/hotels", ShitHotel).Result;
-
-                    Console.WriteLine("Hotellet er oprettet");
-                    Console.WriteLine("Statuskode: " + response.StatusCode);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("SUCCES!!! Hotellet er oprettet");
+                        Console.WriteLine("Statuskode: " + response.StatusCode);
+                        Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
+                        Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
+                        Console.WriteLine("Content: " + response.Content);
+                        Console.WriteLine("Version: " + response.Version);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Fejl, hotellet blev ikke oprettet");
+                        Console.WriteLine("Statuskode: " + response.StatusCode);
+                        Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
+                        Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
+                        Console.WriteLine("Content: " + response.Content);
+                        Console.WriteLine("Version: " + response.Version);
+                    }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Der skete en fejl...");
-                    Console.WriteLine(e); 
+                    Console.WriteLine("It's fucked: " + e);
                 }
+
+
+
+
             }
 
 
