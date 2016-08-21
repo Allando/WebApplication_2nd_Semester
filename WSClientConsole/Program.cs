@@ -250,6 +250,97 @@ namespace WSClientConsole
             //    }
             //}
 
+            //Opg 8
+            using (var client = new HttpClient(handler))
+            {
+                client.BaseAddress = new Uri(serverUrl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
+                    var getHotelResponse = client.GetAsync("api/hotels").Result;
+                    if (getHotelResponse.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("HOTEL Status Code: " + getHotelResponse.IsSuccessStatusCode);
+
+                        var hotelList = getHotelResponse.Content.ReadAsAsync<List<Hotel>>().Result;
+
+                        var hotelQuery =
+                            from h in hotelList
+                            where h.Address.ToString().Contains("Roskilde")
+                            select h;
+
+                        foreach (var h in hotelQuery)
+                        {
+                            Console.WriteLine(h);
+                        }
+
+                        Console.WriteLine();
+                        var getRoomResponse = client.GetAsync("api/rooms").Result;
+                        if (getRoomResponse.IsSuccessStatusCode)
+                        {
+                            Console.WriteLine("ROOMS Status Code: " + getRoomResponse.IsSuccessStatusCode);
+
+                            var roomList = getRoomResponse.Content.ReadAsAsync<List<Room>>().Result;
+
+                            //TEST
+                            //var roomQ =
+                            //    from r in roomList
+                            //    select r;
+
+                            //foreach (var q in roomQ)
+                            //{
+                            //    Console.WriteLine(q.ToString());
+                            //}
+
+                            var roomQuery =
+                                from h in hotelList
+                                join r in roomList
+                                    on h.Hotel_No
+                                    equals r.Hotel_No
+                                where r.Types == "S"
+                                select new
+                                {
+                                    Hotel = h.Name,
+                                    ThaAddress = h.Address,
+
+                                    RoomNo = r.Room_No,
+                                    RoomType = r.Types,
+                                    Prices = r.Price,
+                                };
+
+                            foreach (var hr in roomQuery)
+                            {
+                                try
+                                {                         
+                                    Console.WriteLine("Hotel Name: {0}\nRoom price before: {1}\n",hr.Hotel, hr.Prices);
+
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e);
+                                } 
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No hotels");
+                    }
+
+                    Console.WriteLine();
+
+                    
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("fuck up" + e);
+                }
+                
+            }
+
 
         }
     }

@@ -34,5 +34,10 @@ namespace WebApplication_2nd_Semester
         public virtual ICollection<Booking> Bookings { get; set; }
 
         public virtual Hotel Hotel { get; set; }
+
+        public override string ToString()
+        {
+            return $"Hotel_No: {Hotel_No}, Room_No: {Room_No}, Types: {Types}, Price: {Price}";
+        }
     }
 }
