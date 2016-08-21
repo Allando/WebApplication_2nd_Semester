@@ -93,9 +93,10 @@ namespace WSClientConsole
             //    client.DefaultRequestHeaders.Clear();
             //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            //    var response = client.PostAsJsonAsync("api/hotels", testHotel).Result;
+
             //    try
             //    {
+            //    var response = client.PostAsJsonAsync("api/hotels", testHotel).Result;
             //        if (response.IsSuccessStatusCode)
             //        {
             //            Console.WriteLine("SUCCES!!! Hotellet er oprettet");
@@ -134,10 +135,11 @@ namespace WSClientConsole
             //    client.DefaultRequestHeaders.Clear();
             //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            //    var response = client.PutAsJsonAsync<Hotel>("api/hotels/10", shitHotel).Result;
+
             //    {
             //        try
             //        {
+            //    var response = client.PutAsJsonAsync<Hotel>("api/hotels/10", shitHotel).Result;
             //            if (response.IsSuccessStatusCode)
             //            {
             //                Console.WriteLine("SUCCES!!! Hotellet er opdateret");
@@ -172,12 +174,13 @@ namespace WSClientConsole
             //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             //    string urlString = "api/hotels/11";
-            //    var response = client.DeleteAsync(urlString).Result;
+
 
             //    try
             //    {
             //        if (response.IsSuccessStatusCode)
             //        {
+            //    var response = client.DeleteAsync(urlString).Result;
             //            Console.WriteLine("SUCCES!!! Hotellet er Slettet");
             //            Console.WriteLine("Statuskode: " + response.StatusCode);
             //            Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
@@ -200,6 +203,54 @@ namespace WSClientConsole
             //        Console.WriteLine("It's fucked: " + e);
             //    }
             //}
+
+            //Insert new room in hotel 4
+
+            Room newRoom = new Room()
+            {
+                Hotel_No = 4,
+                Room_No = 4,
+                Price = 564,
+                Types = "D"
+            };
+
+            //using (var client = new HttpClient(handler))
+            //{
+            //    client.BaseAddress = new Uri(serverUrl);
+            //    client.DefaultRequestHeaders.Clear();
+            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+            //    try
+            //    {
+            //        var response = client.PostAsJsonAsync("api/rooms", newRoom).Result;
+
+            //        if (response.IsSuccessStatusCode)
+            //        {
+            //            Console.WriteLine("The room is on fire");
+            //            Console.WriteLine("Statuskode: " + response.StatusCode);
+            //            Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
+            //            Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
+            //            Console.WriteLine("Content: " + response.Content);
+            //            Console.WriteLine("Version: " + response.Version);
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("No room");
+            //            Console.WriteLine("Statuskode: " + response.StatusCode);
+            //            Console.WriteLine("Reason phrase: " + response.ReasonPhrase);
+            //            Console.WriteLine("Is Success status code: " + response.IsSuccessStatusCode);
+            //            Console.WriteLine("Content: " + response.Content);
+            //            Console.WriteLine("Version: " + response.Version);
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine("Fuck up" + e);  
+            //    }
+            //}
+
+
         }
     }
 }
