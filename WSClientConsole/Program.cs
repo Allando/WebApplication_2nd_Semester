@@ -294,34 +294,32 @@ namespace WSClientConsole
                             //}
 
                             var roomQuery =
-                                from h in hotelList
-                                join r in roomList
-                                    on h.Hotel_No
-                                    equals r.Hotel_No
+                                from r in roomList
+                                join h in hotelList
+                                    on r.Hotel_No
+                                    equals h.Hotel_No
                                 where r.Types == "S"
-                                select new
+                                select new Room()
                                 {
-                                    Hotel = h.Name,
-                                    ThaAddress = h.Address,
-
-                                    RoomNo = r.Room_No,
-                                    RoomType = r.Types,
-                                    Prices = r.Price,
+                                 Hotel_No = r.Hotel_No,
+                                 Price = r.Price,
+                                 Room_No = r.Room_No,
+                                 Types = r.Types
                                 };
 
                             foreach (var hr in roomQuery)
                             {
                                 try
                                 {                         
-                                    Console.WriteLine("Hotel Name: {0}\nRoom price before: {1}\n",hr.Hotel, hr.Prices);
+                                    Console.WriteLine("Hotel Name: {0}\nRoom price before: {1}\n",hr.Hotel, hr.Price);
 
+                                    hr.Price *= 1.2;
                                 }
                                 catch (Exception e)
                                 {
                                     Console.WriteLine(e);
                                 } 
                             }
-
                         }
                     }
                     else
